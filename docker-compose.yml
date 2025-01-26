@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  token-tracker:
+    build: .
+    container_name: token_tracker
+    volumes:
+      - ./tracked_tokens.json:/app/tracked_tokens.json
+    restart: unless-stopped
+    environment:
+      - PYTHONUNBUFFERED=1
+    ports:
+      - "8080:80"
+    networks:
+      - token-network
+
+networks:
+  token-network:
+    driver: bridge
